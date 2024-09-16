@@ -69,7 +69,6 @@ const backPanelOptions = [
 const finishOptions = [
   { value: "plywood", label: "Plywood" },
   { value: "veener", label: "Veener" },
-  { value: "mdf", label: "MDF" },
 ];
 
 const onChange = (value, key) => {
@@ -143,8 +142,8 @@ const selectorConfigs = [
     valtioKey: "feet",
     tooltip: (
       <div>
-        <p>Standard</p>
-        <p>Plinth</p>
+        <p>Plinth is not vailable for 24cm depth</p>
+        <p className="mt-5">Note: Plint adds 10cm to the total shelf height</p>
       </div>
     ),
     component: (
@@ -169,11 +168,17 @@ const selectorConfigs = [
   {
     title: "Finish",
     valtioKey: "finish",
+    tooltip: (
+      <div>
+        <p>Standard</p>
+        <p>Plinth</p>
+      </div>
+    ),
     component: (
       <CustomRadioGroup
         radioOptions={finishOptions}
         onChange={(val) => onChange(val, "finish")} // Callback function
-        childMaxWidth={6}
+        childMaxWidth={5}
       />
     ),
   },
@@ -197,7 +202,8 @@ const SideBarConfigurator = () => {
   // snap.configuartor will have the latest values
   // it will be updated when the user interacts with the configurator
 
-  console.log("snap", snap.configurator);
+  console.log("SNAP", snap.configurator);
+
   return (
     <div className="bg-gray-100 h-[92vh] min-h-[700px] flex">
       <div className="w-[70%]">
@@ -288,7 +294,7 @@ const Selectors = ({ title, component, tooltip, valtioValue }) => {
   return (
     <div className="flex items-center my-2">
       <div className="w-[120px]">{title}</div>
-      <div className="w-full flex justify-start border">
+      <div className="w-full flex justify-start">
         {" "}
         {cloneElement(
           component,
@@ -296,9 +302,17 @@ const Selectors = ({ title, component, tooltip, valtioValue }) => {
         )}
         {
           tooltip && (
-            <Tooltip title={tooltip} placement="bottom">
-              <HiOutlineQuestionMarkCircle className="text-gray-400 ml-2" />
-            </Tooltip>
+            <span className="w-full m-auto">
+              <Tooltip
+                arrow={false}
+                autoAdjustOverflow={true}
+                title={tooltip}
+                placement="bottom"
+                className="m-auto hover:text-theme-primary"
+              >
+                <HiOutlineQuestionMarkCircle className="text-gray-400 ml-2 text-xl cursor-pointer" />
+              </Tooltip>
+            </span>
           ) // Display the tooltip if it exists
         }
       </div>

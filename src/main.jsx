@@ -9,7 +9,7 @@ createRoot(document.getElementById("root")).render(
       theme={{
         token: {
           // Seed Token
-          colorPrimary: "#FF3C00",
+          colorPrimary: "#2b8dcb",
           borderRadius: 8,
 
           // Alias Token
