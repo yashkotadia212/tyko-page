@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.color-radio-grp .ant-radio-button-wrapper:not(:first-child)::before {
+  background-color: white !important;
+}
+
+.color-radio-grp .ant-radio-button-wrapper:first-child {
+  border-inline-start: 1px solid white;
+}
