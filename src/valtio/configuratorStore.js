@@ -1,32 +1,3 @@
-// // store.js
-// import { proxy } from "valtio";
-
-// // Define the initial state
-// export const configuratorStore = proxy({
-//   configurator: {
-//     style: "",
-//     width: "",
-//     height: "",
-//     depth: "",
-//     feet: "",
-//     backPanels: "",
-//     finish: "",
-//     color: "",
-//   },
-// });
-
-// // Define the setter function
-// export const setConfiguratorAttribute = (attribute, value) => {
-//   if (configuratorStore.configurator.hasOwnProperty(attribute)) {
-//     configuratorStore.configurator[attribute] = value;
-//   } else {
-//     console.warn(
-//       `Attribute "${attribute}" does not exist in configurator state.`
-//     );
-//   }
-// };
-
-// store.js
 import { proxy, subscribe } from "valtio";
 
 // Define the initial state

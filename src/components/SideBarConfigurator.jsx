@@ -1,4 +1,4 @@
-import React, { cloneElement } from "react";
+import React, { cloneElement, useState } from "react";
 
 //icons
 import { BiDoorOpen } from "react-icons/bi";
@@ -79,16 +79,20 @@ const onChange = (value, key) => {
 const styleRadioOptions = [
   { value: "gradient", icon: <PiGradientFill />, text: "Gradient" },
   { value: "grid", icon: <PiGridNine />, text: "Grid" },
+  { value: "mosaic", icon: <PiGridNine />, text: "Mosaic" },
+  { value: "frame", icon: <PiGridNine />, text: "Frame" },
+  { value: "pattern", icon: <PiGridNine />, text: "Pattern" },
+  { value: "pixel", icon: <PiGridNine />, text: "Pixel" },
   // Add more options as needed
 ];
 
 const colorRadioOptions = [
-  { value: "#0000ff", color: "Blue" },
-  { value: "#ffff00", color: "Yellow" },
-  { value: "#ff00ff", color: "Magenta" },
+  { value: "#d9dad9", color: "Graystone" },
+  { value: "#e3856b", color: "Tangerine" },
+  { value: "#e3ccb2", color: "Beige" },
 ];
 
-const selectorConfigs = [
+const selectorConfigsStatic = [
   {
     title: "Style",
     valtioKey: "style",
@@ -133,7 +137,7 @@ const selectorConfigs = [
         initialValue={"32"} // Set the initial value
         radioOptions={depthRadioOptions}
         onChange={(val) => onChange(val, "depth")} // Callback function
-        childMaxWidth={4}
+        childMaxWidth={3.5}
       />
     ),
   },
@@ -204,13 +208,18 @@ const SideBarConfigurator = () => {
 
   console.log("SNAP", snap.configurator);
 
+  const [selectorConfigs, setSelectorConfigs] = useState(selectorConfigsStatic);
+
   return (
     <div className="bg-gray-100 h-[92vh] min-h-[700px] flex">
       <div className="w-[70%]">
         <ThreeDModelContainer />
       </div>
       <div className="w-[30%]">
-        <CustomizationOptions configuratorValue={snap.configurator} />
+        <CustomizationOptions
+          configuratorValue={snap.configurator}
+          selectorConfigs={selectorConfigs}
+        />
       </div>
     </div>
   );
@@ -228,7 +237,7 @@ const ThreeDModelContainer = () => {
   );
 };
 
-const CustomizationOptions = ({ configuratorValue }) => {
+const CustomizationOptions = ({ configuratorValue, selectorConfigs }) => {
   return (
     <div className="bg-white w-[90%] h-full p-5">
       <div>
@@ -294,7 +303,7 @@ const Selectors = ({ title, component, tooltip, valtioValue }) => {
   return (
     <div className="flex items-center my-2">
       <div className="w-[120px]">{title}</div>
-      <div className="w-full flex justify-start">
+      <div className="ms-5 w-full flex justify-start">
         {" "}
         {cloneElement(
           component,
